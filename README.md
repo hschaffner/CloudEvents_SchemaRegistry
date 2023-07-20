@@ -173,7 +173,7 @@ It is assumed the developer is already familiar with Maven, Spring, Confluent an
 
 This is a Spring project that can be downloaded or cloned. It is created with the expectation that the Confluent infrastructure is available in Confluent Cloud. A free cloud account can be created for testing. 
 
-Once the Confluent Cloud is setup and created, it is expected the appropriate keys for Confluent Cloud and Confluent Schema Registry are updated in the "application.yaml" file. 
+Once the Confluent Cloud is setup and created, it is expected the appropriate keys for Confluent Cloud and Confluent Schema Registry are updated in the "application.yaml" and "pom.xml" files. 
 
 In this example a schema was stored that was called "CloudEvents_Reference". It is possible to create the schema that is used for the reference without creating a topic. From the Confluent Cloud Environment where your cluster is created it is possible to use the Stream Governence Package (found on the right of the page that lists the Cloud Environments) to create a schema directly. The schema used for the reference is found in the project under the "jsonschema" folder and is called "JsonMsg.json". Simply copy this schema into the Schmea Registry schema editor.
 
