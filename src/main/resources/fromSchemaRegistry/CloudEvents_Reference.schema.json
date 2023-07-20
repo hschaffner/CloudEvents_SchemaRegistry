@@ -1,0 +1,1 @@
+{"$id":"http://example.com/example.json","$schema":"http://json-schema.org/draft-07/schema#","default":{},"description":"The root schema comprises the entire JSON document.","properties":{"customer_id":{"type":"integer"},"first_name":{"type":"string"},"last_name":{"type":"string"}},"required":["first_name","last_name","customer_id"],"title":"JsonMsg","type":"object"}

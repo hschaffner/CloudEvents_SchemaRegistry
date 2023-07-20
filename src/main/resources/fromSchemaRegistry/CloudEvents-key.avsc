@@ -1,0 +1,1 @@
+{"type":"record","name":"avroMsgK","namespace":"io.confluent.heinz","fields":[{"name":"client","type":"string"},{"name":"clientID","type":"int"}]}

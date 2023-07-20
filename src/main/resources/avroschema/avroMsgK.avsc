@@ -1,0 +1,15 @@
+{
+  "namespace": "io.confluent.heinz",
+  "type": "record",
+  "name": "avroMsgK",
+  "fields": [
+    {
+      "name": "client",
+      "type": "string"
+    },
+    {
+      "name": "clientID",
+      "type": "int"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+bootstrap.servers: "<YOUR_CLOUD_URL>:9092"
+key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+value.serializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer
+schema.registry.url: "<YOUR_CLOUD_URL>"
+schema.registry.basic.auth.user.info: "<>YOUR_API_KEY>:<YOUR_API_SECRET"
+basic.auth.credentials.source: "USER_INFO"
+sasl.mechanism: "PLAIN"
+sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule   required username='<YOUR_USER_ACCOUNT>'   password='<ACCOUNT_PASSWORD>"
+security.protocol: "SASL_SSL"
+client.dns.lookup: "use_all_dns_ips"
+acks: "all"
+enable.idempotence: "true"
+transactional.id: "cons-1"
+
+consume.group.id: "complexSchemaGroupID"
+producer.id: "complexSchemaProducer"
+#consume.enable.auto.commit: "true"
+consume.enable.auto.commit: "false"
+consume.isolation.level: "read_committed"
+
+topic: "CloudEvents"
+
+# REST listening port for POST Request
+server:
+  port: 9090
+
+
+logging:
+level:
+root: INFO
+io.confluent.heinz: ERROR
+org.apache.kafka.clients.FetchSessionHandler: ERROR
+io.confluent.heinz.cloudeventsconfluentsr.restController: INFO
+io.confluent.heinz.cloudeventsconfluentsr.ConfluentSession: INFO
+
+
+
