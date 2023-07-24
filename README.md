@@ -25,7 +25,7 @@ _When a CloudEvent's data changes in a backwardly-compatible way, the value of t
 Part of Confluent's data management strategy includes their Schema Registry. Unlike the CloudEvents payload attribute, Confluent's Schema Registry supports the efficient transport of the schema
 on a per-message basis. The schema reference is also part of the API serialization/deserialization of the payload messages and also supports
 a different schema for the Confluent record value and record key. The registry also supports and recognize multiple schema migraiton strategies beyond simple CloudEvents backward compatibility. The Confluent brokers
-can be configured to also participate in the schema stratgey where published messages that do not adhere to the schemas in the registry associated with the topic will be rejected.
+can be configured to also participate in the schema strategy where published messages that do not adhere to the schemas in the registry associated with the topic will be rejected.
 
 More details on Schema Registry can be found here:
 
@@ -87,9 +87,13 @@ If you are using multiple schemas in the same topic, the schema should include s
     }
 ```
 
-In this case there is only single JSON references, however in practice you would include all the schema references for all the potenital schemas  used for messages in the same topic. However, you will get the same protocol error thrown by the Confluent JSON serializer. 
+In this case there is only single JSON references, however in practice you would include all the schema references for all the potential schemas  used for messages in the same topic. However, you will get a new error thrown: 
 
-There is a workaround, but it is not recommended. Basically, the documentation suggests setting:
+```
+Caused by: java.io.IOException: Incompatible schema
+```
+
+There is a workaround for both errors, but it is not recommended. Basically, the documentation suggests setting:
 
 ```
 properties.setProperty("latest.compatibility.strict","false");
@@ -154,7 +158,7 @@ This method creates a cached Schema Registry client and then retrieves the metad
 registered for the schema associated with the schema subject ( the topic name appended with "-value"). The method 
 then iterates over all the associated references and gets the reference schema from the Schema Registry using the reference names and stores them in a Map of JsonSchemas. It also stores a map of the JsonSchema as JsonNodes. 
 
-Finally, the method stores the maps as ImmutableMaps. Notic that the JsonSchema that is created no longer based on just the original string-based JSON schema (in this case the CloudEvents schema with a reference for the data attribute). The JsonSchema object is created to include a map of the schema reference labels and the map of the associated referencable schemas. When this JSON schema is used to publish the record
+Finally, the method stores the maps as ImmutableMaps. Notice that the JsonSchema that is created no longer based on just the original string-based JSON schema (in this case the CloudEvents schema with a reference for the data attribute). The JsonSchema object is created to include a map of the schema reference labels and the map of the associated referencable schemas. When this JSON schema is used to publish the record
 there will be no exceptions thrown since it understands how to iterate and validate the referenced schema(s) found in the CloudEvents schema. In this test sample there is only one reference, but this will work even if there are multiple referenced schemas in the CloudEvent schema.
 
 A sample of the send method and the associated arguments has already been referenced above. However, there is an alternative send method when schemas with reference are used against Confluent schema registry. An alternative is:
