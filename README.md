@@ -71,7 +71,7 @@ metadata = producerCfltCe.send(new ProducerRecord<>(topic, msgK,
 you will get an exception since the "jsonSchema1" does not understand the reference and throws an error since it expects the $ref attribute to be a URI and obviously this is not a properly formed URI. As a result you get an error similar to:
 
 ```
-Caused by: java.io.UncheckedIOException: java.net.MalformedURLException: no protocol: JsonMsgJsonMsg.json
+Caused by: java.io.UncheckedIOException: java.net.MalformedURLException: no protocol: JsonMsg.json
 ```
 
 If you are using multiple schemas in the same topic, the schema should include something similar to:
